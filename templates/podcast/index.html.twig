@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <a href="{{ path('podcast_new') }}" class="mt-4 btn bg-corail">Ajouter un podcast</a>
+
+    <table class="table mt-4">
+        <thead class="bg-bleu-ciel">
+            <tr>
+                <th>Titre</th>
+                <th>Date de publication</th>
+                <th>Lecteur</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody class="bg-blanc">
+        {% for podcast in podcasts %}
+            <tr>
+                <td>{{ podcast.title }}</td>
+                <td>{{ podcast.publishedAt ? podcast.publishedAt|date("d/m/Y") : "" }}</td>
+                <td>
+                    <figure>
+                        <audio
+                            controls
+                            src="{{ podcast.path }}">
+                                Your browser does not support the
+                                <code>audio</code> element.
+                        </audio>
+                    </figure>
+                </td>
+                <td>
+                    <a href="{{ path('podcast_show', {'id': podcast.id}) }}" class="btn bg-corail">afficher</a>
+                    {# <a href="{{ path('podcast_edit', {'id': podcast.id}) }}">edit</a> #}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

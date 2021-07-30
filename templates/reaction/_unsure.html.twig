@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('reaction_unsure', {'id': podcast.id}) }}">
+    <input type="hidden" name="_token" value="{{ csrf_token('unsure' ~ podcast.id) }}">
+    <button class="btn">Bof</button>
+</form>

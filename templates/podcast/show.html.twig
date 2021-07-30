@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <a href="{{ path('podcast_index') }}" class="mt-4 btn bg-corail">Retour à la liste des podcasts</a>
+
+    <div class="card mt-4 shadow border-0">
+        <div class="card-body">
+            <h5 class="card-title">{{ podcast.title }}</h5>
+            <div class="row">
+                <div class="col-6">
+                    <figure>
+                        <audio
+                            controls
+                            src="{{ podcast.path }}">
+                                Your browser does not support the
+                                <code>audio</code> element.
+                        </audio>
+                    </figure>
+                </div>
+                <div class="col-6">
+                    <p class="card-text">{{ podcast.description }}</p>
+                </div>
+            </div>
+            <div class="d-inline-flex align-items-end">
+                <a href="{{ path('reaction_happy', {'id':podcast.id}) }}" class="p-2">
+                    <img src="{{ asset('img/happy.png') }}" class="reaction">
+                </a>
+                <a href="{{ path('reaction_sad', {'id':podcast.id}) }}" class="p-2">
+                    <img src="{{ asset('img/sad.png') }}" class="reaction">
+                </a>
+                <a href="{{ path('reaction_unsure', {'id':podcast.id}) }}" class="p-2">
+                    <img src="{{ asset('img/unsure.png') }}" class="reaction">
+                </a>
+                <a href="{{ path('reaction_confused', {'id':podcast.id}) }}" class="p-2">
+                    <img src="{{ asset('img/confused.png') }}" class="reaction">
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <table class="table">
+        <tbody>
+            {% for reaction in reactions %}
+                <tr>
+                    <td>{{ reaction.userId.username }} <img src="{{ asset(reaction.picture) }}" class="reaction"></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
